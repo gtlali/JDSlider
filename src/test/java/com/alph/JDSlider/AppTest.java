@@ -38,10 +38,12 @@ public class AppTest extends TestCase {
 	 * Rigourous Test :-)
 	 * 
 	 * @throws MalformedURLException
+	 * @throws InterruptedException 
 	 */
-	public void testApp() throws MalformedURLException {
+	public void testApp() throws MalformedURLException, InterruptedException {
 		DesktopOptions options = new DesktopOptions();
 		options.setApplicationPath("C:\\Windows\\System32\\calc.exe");
+		Thread.sleep(2000);
 
 		WiniumDriver driver = new WiniumDriver(new URL("http://localhost:9999"), options);
 		driver.findElement(By.name("6")).click();
@@ -49,7 +51,7 @@ public class AppTest extends TestCase {
 		driver.findElement(By.name("8")).click();
 		driver.findElement(By.name("Equals")).click();
 		String s = driver.findElement(By.id("150")).getAttribute("Name");
-		if (s.equals("48"))
+		if (s.equals("64"))
 			assertTrue(true);
 		else
 			assertFalse(true);
