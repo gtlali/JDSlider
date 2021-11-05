@@ -1,1 +1,1 @@
-# JDSlider
+# JDSlider my new project
