@@ -1,4 +1,4 @@
-# JDSlider my new project
+# Java based Slider Widget
 JDSlider is simple java widget
 
 	public class App {
