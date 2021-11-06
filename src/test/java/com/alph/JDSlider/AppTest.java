@@ -1,5 +1,6 @@
 package com.alph.JDSlider;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -40,21 +41,54 @@ public class AppTest extends TestCase {
 	 * @throws MalformedURLException
 	 * @throws InterruptedException 
 	 */
-	public void testApp() throws MalformedURLException, InterruptedException {
-		DesktopOptions options = new DesktopOptions();
-		options.setApplicationPath("C:\\Windows\\System32\\calc.exe");
-		Thread.sleep(2000);
+	public void testApp() throws InterruptedException  {
+		
+		DesktopOptions option = new DesktopOptions();
 
-		WiniumDriver driver = new WiniumDriver(new URL("http://localhost:9999"), options);
+		option.setApplicationPath("C:\\Windows\\System32\\calc.exe");
+		WiniumDriver driver=null;
+		try {
+			driver = new WiniumDriver(new URL("http://localhost:9999"), option);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		driver.findElement(By.name("6")).click();
 		driver.findElement(By.id("92")).click();
 		driver.findElement(By.name("8")).click();
 		driver.findElement(By.name("Equals")).click();
-		String s = driver.findElement(By.id("150")).getAttribute("Name");
-		if (s.equals("64"))
-			assertTrue(true);
-		else
-			assertFalse(true);
+		String output = driver.findElement(By.id("150")).getAttribute("Name");
+		
+		System.out.println("Result after addition is:"+output);
+		
+		driver.findElement(By.id("81")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("136")).click();
+		driver.findElement(By.id("134")).click();
+		//driver.findElement(By.name("6")).click();
+		driver.findElement(By.id("91")).click();
+		driver.findElement(By.name("2")).click();
+		driver.findElement(By.name("Equals")).click();
+		output = driver.findElement(By.id("150")).getAttribute("Name");
+		System.out.println("Result after addition is:"+output);
+		
+		driver.findElement(By.id("81")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("134")).click();
+		driver.findElement(By.id("135")).click();
+		driver.findElement(By.id("104")).click();
+		//driver.findElement(By.name("2")).click();
+		driver.findElement(By.name("Equals")).click();
+		output = driver.findElement(By.id("150")).getAttribute("Name");
+		System.out.println("Result after addition is:"+output);
+		driver.quit();
 
 	    assertTrue( true );
 	}
