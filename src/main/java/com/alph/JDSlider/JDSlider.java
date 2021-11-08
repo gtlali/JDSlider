@@ -212,7 +212,7 @@ public class JDSlider extends JSlider implements ChangeListener {
 		public void showToolTip(MouseEvent me) {
 			item.setText("" + slider.getDoubleValue());
 
-			// limit the tooltip location relative to the slider
+			// limit the tool tip location relative to the slider
 			Rectangle b = me.getComponent().getBounds();
 			int x = me.getX();
 			x = (x > (b.x + b.width / 2) ? (b.x + b.width / 2) : (x < (b.x - b.width / 2) ? (b.x - b.width / 2) : x));
@@ -259,12 +259,18 @@ public class JDSlider extends JSlider implements ChangeListener {
 		 * Required by {@MouseListener}.
 		 */
 		public void mouseEntered(MouseEvent me) {
+			/*
+			 *  update code for mouseEntered
+			 */
 		}
 
 		/**
 		 * Required by {@MouseListener}.
 		 */
 		public void mouseExited(MouseEvent me) {
+			/*
+			 *  update code for mouseExited
+			 */
 		}
 	}
 
