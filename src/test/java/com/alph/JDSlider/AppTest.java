@@ -1,5 +1,7 @@
 package com.alph.JDSlider;
 
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -7,9 +9,15 @@ import java.net.URL;
 //import java.util.Calendar;
 //import java.util.Date;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
 //import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.winium.DesktopOptions;
 import org.openqa.selenium.winium.WiniumDriver;
@@ -52,13 +60,18 @@ public class AppTest extends TestCase {
 
 		option.setApplicationPath("C:\\Windows\\System32\\calc.exe");
 		WiniumDriver driver=null;
-		mytestCalc(option,driver);
+		try {
+			mytestCalc(option,driver);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//startJDSlider();	
 		
 		assertTrue( true );
 	}
 	
-	public void mytestCalc(DesktopOptions option, WiniumDriver driver) throws InterruptedException
+	public void mytestCalc(DesktopOptions option, WiniumDriver driver) throws InterruptedException, IOException
 	{
 		
 		try {
@@ -68,7 +81,7 @@ public class AppTest extends TestCase {
 			e1.printStackTrace();
 		}
 		
-		Thread.sleep(3000);		
+		Thread.sleep(2000);		
 
 		driver.findElement(By.name("6")).click();
 		driver.findElement(By.id("92")).click();
@@ -76,7 +89,7 @@ public class AppTest extends TestCase {
 		driver.findElement(By.name("Equals")).click();
 		String output = driver.findElement(By.id("150")).getAttribute("Name");
 		
-		System.out.println("Result after addition is:"+output);
+		System.out.println("Result after Multiplication is:"+output);
 		
 		driver.findElement(By.id("81")).click();
 		Thread.sleep(1000);
@@ -87,7 +100,9 @@ public class AppTest extends TestCase {
 		driver.findElement(By.name("2")).click();
 		driver.findElement(By.name("Equals")).click();
 		output = driver.findElement(By.id("150")).getAttribute("Name");
-		System.out.println("Result after addition is:"+output);
+		String cls = driver.findElement(By.id("150")).getClass().getName();
+		
+		System.out.println("Result after Division is:"+output+"::"+cls);
 		
 		driver.findElement(By.id("81")).click();
 		
@@ -99,8 +114,11 @@ public class AppTest extends TestCase {
 		//driver.findElement(By.name("2")).click();
 		driver.findElement(By.name("Equals")).click();
 		output = driver.findElement(By.id("150")).getAttribute("Name");
-		System.out.println("Result after addition is:"+output);		
-		captureScreen(driver);
+		System.out.println("Result after trignometric function tan@ is:"+output);		
+		System.out.println("Screenshot path:"+ captureScreen(driver));
+		
+		takeScreenshotActiveTestWindow(driver);
+		takeScreenshotElement(driver);
 		driver.findElement(By.name("Close")).click();		
 		System.out.println("Closed the calculator app");
 			
@@ -139,6 +157,45 @@ public class AppTest extends TestCase {
 		}
 		d.findElement(By.name("Close")).click();			
 		d.quit();
+	}
+	
+	
+	public void takeScreenshotActiveTestWindow(WiniumDriver winiDriver ) throws IOException {
+		WebElement element = winiDriver.findElement(By.name("Calculator"));	
+	    File screenshot = winiDriver.getScreenshotAs(OutputType.FILE);
+	    Rectangle rectangle = new Rectangle(element.getSize().width, element.getSize().height);
+	    System.out.println("Element size" + rectangle + "::"+ element.getAttribute("BoundingRectangle"));
+	    
+	    String[] values = element.getAttribute("BoundingRectangle").split(",");	    
+	    System.out.println("value of values:" + values[0]);
+	    int x = Integer.parseInt(values[0]);
+	    int y = Integer.parseInt(values[1]);
+	    BufferedImage bufferedImage = ImageIO.read(screenshot);
+	    BufferedImage destImage = bufferedImage.getSubimage(x+7, y, rectangle.width-14, rectangle.height-7);
+	    ImageIO.write(destImage, "png", screenshot);
+	    String path = "D:/target/screenshots/" + screenshot.getName();
+	 
+	    FileUtils.copyFile(screenshot, new File(path));   	   
+    
+	}
+	
+	public void takeScreenshotElement(WiniumDriver winiDriver ) throws IOException {
+		WebElement element = winiDriver.findElement(By.id("105"));	
+	    File screenshotElement = winiDriver.getScreenshotAs(OutputType.FILE);
+	    Rectangle rectangle = new Rectangle(element.getSize().width, element.getSize().height);
+	    System.out.println("Element size" + rectangle + "::"+ element.getAttribute("BoundingRectangle"));
+	    
+	    String[] values = element.getAttribute("BoundingRectangle").split(",");	    
+	    System.out.println("value of values:" + values[0]);
+	    int x = Integer.parseInt(values[0]);
+	    int y = Integer.parseInt(values[1]);
+	    BufferedImage bufferedImage = ImageIO.read(screenshotElement);
+	    BufferedImage destImage = bufferedImage.getSubimage(x+5, y, rectangle.width-10, rectangle.height-5);
+	    ImageIO.write(destImage, "png", screenshotElement);
+	    String path = "D:/target/screenshots/" + screenshotElement.getName();
+	 
+	    FileUtils.copyFile(screenshotElement, new File(path));   	   
+    
 	}
 	
 	
