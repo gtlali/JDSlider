@@ -25,7 +25,7 @@ public class JDSlider extends JSlider implements ChangeListener {
 	// Public data
 	// ========================================
 	// public final static double DOUBLE_FACTOR = 100.0;
-	public static double DOUBLE_FACTOR;
+	private  double DOUBLE_FACTOR;
 
 	// ========================================
 	// Protected data
@@ -49,7 +49,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 */
 	public JDSlider() {
 		super();
-		DOUBLE_FACTOR = 100.0;
+		//DOUBLE_FACTOR = 100.0;
+		setFactor(100.0);
 		setDoubleMinimum(0.0);
 		setDoubleMaximum(100.0);
 		setDoubleValue(50.0);
@@ -68,7 +69,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 */
 	public JDSlider(double min, double max, double val) {
 		super();
-		DOUBLE_FACTOR = 100.0;
+		//DOUBLE_FACTOR = 100.0;
+		setFactor(100.0);
 		setUI(new DoubleJSliderUI(this));
 		
 		setBorder(border);
@@ -81,7 +83,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 
 	public JDSlider(double min, double max, double val, double factor) {
 		super();
-		DOUBLE_FACTOR = factor;
+		//DOUBLE_FACTOR = factor;
+		setFactor(factor);
 		setUI(new DoubleJSliderUI(this));
 		setBorder(border);
 		setDoubleMinimum(min);
@@ -108,6 +111,19 @@ public class JDSlider extends JSlider implements ChangeListener {
 		return JDSlider.labelID;
 		
 	}
+	/**
+	 * 
+	 * @param factor
+	 * @return
+	 */
+	public void  setFactor(double factor)
+	{
+		DOUBLE_FACTOR = factor;
+	}
+	public double  getFactor()
+	{
+		return DOUBLE_FACTOR;
+	}
 
 
 	// ========================================
@@ -119,7 +135,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 * @return The maximum value for the slider in double.
 	 */
 	public double getDoubleMaximum() {
-		return (getMaximum() / DOUBLE_FACTOR);
+		//return (getMaximum() / DOUBLE_FACTOR);
+		return (getMaximum() / getFactor());
 	}
 
 	/**
@@ -128,7 +145,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 * @return The minimum value for the slider in double.
 	 */
 	public double getDoubleMinimum() {
-		return (getMinimum() / DOUBLE_FACTOR);
+		//return (getMinimum() / DOUBLE_FACTOR);
+		return (getMinimum() / getFactor());
 	}
 
 	/**
@@ -137,7 +155,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 * @return The current value of the slider in double.
 	 */
 	public double getDoubleValue() {
-		return (getValue() / DOUBLE_FACTOR);
+		//return (getValue() / DOUBLE_FACTOR);
+		return (getValue() / getFactor());
 	}
 
 	/**
@@ -148,7 +167,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 *            slider.
 	 */
 	public void setDoubleMaximum(double max) {
-		setMaximum((int) (max * DOUBLE_FACTOR));
+		//setMaximum((int) (max * DOUBLE_FACTOR));
+		setMaximum((int) (max * getFactor()));
 	}
 
 	/**
@@ -159,7 +179,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 *            slider.
 	 */
 	public void setDoubleMinimum(double min) {
-		setMinimum((int) (min * DOUBLE_FACTOR));
+		//setMinimum((int) (min * DOUBLE_FACTOR));
+		setMinimum((int) (min * getFactor()));
 	}
 
 	/**
@@ -170,7 +191,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 *            slider.
 	 */
 	public void setDoubleValue(double val) {
-		setValue((int) (val * DOUBLE_FACTOR));
+		//setValue((int) (val * DOUBLE_FACTOR));
+		setValue((int) (val * getFactor()));
 		setToolTipText(Double.toString(val));
 	}
 

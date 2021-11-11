@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
  */
 public class App {
 	// label
-	static JLabel l;
+	//static JLabel l;
 
 	public void buildGUI() {
 		final JDSlider slider = new JDSlider(0, 600, 1);
@@ -37,7 +37,7 @@ public class App {
 
 		JFrame f = new JFrame();
 		// create label
-		l = new JLabel();
+		final JLabel l  = new JLabel();
 		l.setName(slider.getLabelID());
 		f.getContentPane().add(slider);
 
