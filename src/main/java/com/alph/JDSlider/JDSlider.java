@@ -35,6 +35,8 @@ public class JDSlider extends JSlider implements ChangeListener {
 	// Private Data
 	// ========================================
 	private static final long serialVersionUID = 8104332457463381081L;
+	private static final String labelID="SDxLb1";
+	
 
 	/** This border show the current value of the slider as its title. */
 	private TitledBorder border = new TitledBorder(new EtchedBorder());
@@ -68,6 +70,7 @@ public class JDSlider extends JSlider implements ChangeListener {
 		super();
 		DOUBLE_FACTOR = 100.0;
 		setUI(new DoubleJSliderUI(this));
+		
 		setBorder(border);
 		setDoubleMinimum(min);
 		setDoubleMaximum(max);
@@ -97,6 +100,15 @@ public class JDSlider extends JSlider implements ChangeListener {
 	public void setLabel(String s) {
 		border.setTitle(s);
 	}
+	/** Get the ID for the label field
+	 * 
+	 * @return labelID
+	 */
+	public String getLabelID() {
+		return JDSlider.labelID;
+		
+	}
+
 
 	// ========================================
 	// Set/Get methods
@@ -184,7 +196,7 @@ public class JDSlider extends JSlider implements ChangeListener {
 	 */
 	class DoubleJSliderUI extends BasicSliderUI implements MouseMotionListener, MouseListener {
 		final JPopupMenu pop = new JPopupMenu();
-		JMenuItem item = new JMenuItem();
+		JMenuItem item = new JMenuItem(labelID);
 
 		JDSlider slider;
 

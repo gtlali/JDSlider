@@ -14,7 +14,7 @@ public class App {
 
 	public void buildGUI() {
 		final JDSlider slider = new JDSlider(0, 600, 1);
-
+		
 		slider.setMajorTickSpacing(1000);
 		slider.setMinorTickSpacing(100);
 		slider.setPaintTicks(true);
@@ -38,7 +38,7 @@ public class App {
 		JFrame f = new JFrame();
 		// create label
 		l = new JLabel();
-
+		l.setName(slider.getLabelID());
 		f.getContentPane().add(slider);
 
 		f.pack();

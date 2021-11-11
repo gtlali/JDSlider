@@ -101,8 +101,9 @@ public class AppTest extends TestCase {
 		driver.findElement(By.name("Equals")).click();
 		output = driver.findElement(By.id("150")).getAttribute("Name");
 		String cls = driver.findElement(By.id("150")).getClass().getName();
+		String css = driver.findElement(By.id("150")).getCssValue("Name");
 		
-		System.out.println("Result after Division is:"+output+"::"+cls);
+		System.out.println("Result after Division is:"+output+"::"+cls +"::"+css);
 		
 		driver.findElement(By.id("81")).click();
 		
@@ -114,6 +115,7 @@ public class AppTest extends TestCase {
 		//driver.findElement(By.name("2")).click();
 		driver.findElement(By.name("Equals")).click();
 		output = driver.findElement(By.id("150")).getAttribute("Name");
+		System.out.println("Class name:" + driver.findElement(By.id("150")).getAttribute("Name").getClass());
 		System.out.println("Result after trignometric function tan@ is:"+output);		
 		System.out.println("Screenshot path:"+ captureFullScreenShot(driver));
 		
