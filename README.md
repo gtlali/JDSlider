@@ -55,4 +55,6 @@ JDSlider is simple java widget
 			}
 		});
 	}
+	************************************************
+	There TestApp code added that helps GUI Testing using WiniumDriver for desktop
 }

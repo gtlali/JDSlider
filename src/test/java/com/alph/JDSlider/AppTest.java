@@ -115,7 +115,7 @@ public class AppTest extends TestCase {
 		driver.findElement(By.name("Equals")).click();
 		output = driver.findElement(By.id("150")).getAttribute("Name");
 		System.out.println("Result after trignometric function tan@ is:"+output);		
-		System.out.println("Screenshot path:"+ captureScreen(driver));
+		System.out.println("Screenshot path:"+ captureFullScreenShot(driver));
 		
 		takeScreenshotActiveTestWindow(driver);
 		takeScreenshotElement(driver);
@@ -124,7 +124,7 @@ public class AppTest extends TestCase {
 			
 		
 	}
-	public String captureScreen(WiniumDriver augmentedDriver ) {
+	public String captureFullScreenShot(WiniumDriver augmentedDriver ) {
 	    String path;
 	    try {
 	    	File source = augmentedDriver.getScreenshotAs(OutputType.FILE);	       
