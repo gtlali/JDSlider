@@ -1,6 +1,6 @@
 # Java based Slider Widget
 # Updating to testing rebuild action
-JDSlider is simple java widget
+JDSlider is simple java widget for showing the double slider
 
 	public class App {
 	
